@@ -1,0 +1,19 @@
+dependencies:
+  override: []
+
+deploy:
+  max_commits: # Automatically deploy all commits, no matter how many.
+  override:
+    - ./bin/deployer bash -lc "cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} deploy_url=${DEPLOY_URL} bin/deploy"
+
+ci:
+  require:
+    - powerhome/image
+  allow_failures:
+    - continuous-integration/jenkins/branch
+
+review:
+  checklist: []
+
+status:
+  context: powerhome/deploy/pr
